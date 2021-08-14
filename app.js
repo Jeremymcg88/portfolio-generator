@@ -135,8 +135,14 @@ when: ({ confirmAbout}) => confirmAbout
    promptUser()
   .then (promptProject)
   .then(portfolioData => {
-      console.log(portfolioData);
-  })
+      const pageHTML = generatePage(portfolioData);
+    
+        fs.writeFile('./index.html', pageHTML, err => {
+          if (err) throw new Error(err);
+
+          console.log('Page created! check out index.html in this directory to see it!');
+      });
+  });
         // .then(answers => console.log(answers))
         // .then(promptProject)
         // .then(projectAnswers => console.log(projectAnswers));
